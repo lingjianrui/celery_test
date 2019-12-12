@@ -9,7 +9,7 @@ video_compress.apply_async(["a"], queue='tasks', priority=3)
 video_compress.apply_async(["b"], queue='tasks', priority=3)  
 video_upload.apply_async(["c"], queue='tasks', priority=2)  
 video_upload.apply_async(["d"], queue='tasks', priority=4)   
-**预期测试结果:** 
+**预期测试结果:**   
 命令行显示  
 d  
 a  
@@ -23,7 +23,7 @@ c
 ![](leanote://file/getImage?fileId=5df199c14da5dc0607000004)
 
 # 多个队列优先级(RabbitMQ)
-**测试用例描述:**  
+**测试用例描述:**   
 多个队列，优先级高的先被消费，优先级低的后消费  
 **测试准备数据:**  
 video_compress.apply_async(["a"],queue='high')  
