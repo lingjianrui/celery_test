@@ -3,19 +3,19 @@
 
 # 单个队列优先级(RabbitMQ)
 **测试用例描述:**  
-同一个队列 多个任务入queue，优先级高的先被消费 
+同一个队列 多个任务入queue，优先级高的先被消费   
 **测试准备数据:**  
-video_compress.apply_async(["a"], queue='tasks', priority=3) 
-video_compress.apply_async(["b"], queue='tasks', priority=3) 
-video_upload.apply_async(["c"], queue='tasks', priority=2) 
-video_upload.apply_async(["d"], queue='tasks', priority=4)
-**预期测试结果:**
-命令行显示
-d
-a
-b
-c
-**测试方法:**  
+video_compress.apply_async(["a"], queue='tasks', priority=3)  
+video_compress.apply_async(["b"], queue='tasks', priority=3)  
+video_upload.apply_async(["c"], queue='tasks', priority=2)  
+video_upload.apply_async(["d"], queue='tasks', priority=4) 
+**预期测试结果:** 
+命令行显示  
+d  
+a  
+b  
+c  
+**测试方法:**    
 1. python priority_test.py 将测试数据入queue
 2. celery -A tasks worker -Q tasks --loglevel=info -c 1
 
@@ -24,12 +24,12 @@ c
 
 # 多个队列优先级(RabbitMQ)
 **测试用例描述:**  
-多个队列，优先级高的先被消费，优先级低的后消费
+多个队列，优先级高的先被消费，优先级低的后消费  
 **测试准备数据:**  
-video_compress.apply_async(["a"],queue='high')
-video_compress.apply_async(["b"],queue='low')
-video_upload.apply_async(["c"], queue='low')
-video_upload.apply_async(["d"], queue='high')
+video_compress.apply_async(["a"],queue='high')  
+video_compress.apply_async(["b"],queue='low')  
+video_upload.apply_async(["c"], queue='low')  
+video_upload.apply_async(["d"], queue='high')  
 **预期测试结果:**  
 命令行显示  
 a  
@@ -37,11 +37,11 @@ d
 b  
 c  
 **测试方法:**  
-1. python multi_queue_priority_test.py 将测试数据入queue
-2. celery -A tasks worker -Q high,low --loglevel=info -c 1
+1. python multi_queue_priority_test.py 将测试数据入queue  
+2. celery -A tasks worker -Q high,low --loglevel=info -c 1  
 
 **实际结果:**  
-![](leanote://file/getImage?fileId=5df197994da5dc0607000002)  
+![](leanote://file/getImage?fileId=5df197994da5dc0607000002)    
 
 # 多个队列优先级混合单个队列优先级(RabbitMQ)  
 
@@ -49,10 +49,10 @@ c
     多个普通队列带有优先级，和一个优先级队列在一起测试  
 
 **测试准备数据:**  
-    video_compress.apply_async(["a"],queue='highs', priority=8)  
+    video_compress.apply_async(["a"],queue='highs', priority=8)    
     video_compress.apply_async(["b"],queue='low')  
     video_upload.apply_async(["c"], queue='low')  
-    video_upload.apply_async(["d"], queue='highs',priority=1)  
+    video_upload.apply_async(["d"], queue='highs',priority=1)    
  
 **预期测试结果:**  
     命令行显示  
@@ -62,22 +62,22 @@ c
     c  
 
 **测试方法:**  
-1. python multi_single_queue_priority_test.py 将测试数据入queue
-2. celery -A tasks worker -Q highs,low --loglevel=info -c 1
+1. python multi_single_queue_priority_test.py 将测试数据入queue  
+2. celery -A tasks worker -Q highs,low --loglevel=info -c 1  
 
-**实际结果:**
-![](leanote://file/getImage?fileId=5df199384da5dc0607000003)
+**实际结果:**  
+![](leanote://file/getImage?fileId=5df199384da5dc0607000003)  
 
 
 # 代码目录
-celery_test
-├── celery_config.py
-├── multi_queue_priority_test.py
-├── multi_single_queue_priority_test.py
-├── priority_test.py
-└── tasks.py
+celery_test  
+├── celery_config.py  
+├── multi_queue_priority_test.py  
+├── multi_single_queue_priority_test.py  
+├── priority_test.py  
+└── tasks.py  
 
-## celery_config.py
+## celery_config.py  
 ```
 from kombu import Exchange, Queue
 
