@@ -46,20 +46,20 @@ c
 # 多个队列优先级混合单个队列优先级(RabbitMQ)  
 
 **测试用例描述:**  
-    多个普通队列带有优先级，和一个优先级队列在一起测试  
+多个普通队列带有优先级，和一个优先级队列在一起测试  
 
 **测试准备数据:**  
-    video_compress.apply_async(["a"],queue='highs', priority=8)    
-    video_compress.apply_async(["b"],queue='low')  
-    video_upload.apply_async(["c"], queue='low')  
-    video_upload.apply_async(["d"], queue='highs',priority=1)    
+video_compress.apply_async(["a"],queue='highs', priority=8)    
+video_compress.apply_async(["b"],queue='low')  
+video_upload.apply_async(["c"], queue='low')  
+video_upload.apply_async(["d"], queue='highs',priority=1)    
  
 **预期测试结果:**  
-    命令行显示  
-    a  
-    d  
-    b  
-    c  
+命令行显示  
+a  
+d  
+b  
+c  
 
 **测试方法:**  
 1. python multi_single_queue_priority_test.py 将测试数据入queue  
